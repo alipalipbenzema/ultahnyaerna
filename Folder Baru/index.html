@@ -1,0 +1,278 @@
+
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Erna ❤️</title>
+    <style>
+        /* INLINE CSS - NO EXTERNAL FILE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: system-ui, -apple-system, sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a0033 0%, #2d1b69 30%, #4d0080 60%, #8a2be2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        /* CANVAS */
+        #canvas { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            z-index: 1; 
+        }
+        
+        /* LOADER */
+        .loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(26,0,51,0.98);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 0.4s ease;
+        }
+        .love-loader { font-size: clamp(2.5rem, 12vw, 5rem); margin-bottom: 2rem; text-shadow: 0 0 30px #ff1493; }
+        .love-spin { animation: spin 1s linear infinite; }
+        .love-fall { animation: fall 1s ease-in-out infinite 0.2s; }
+        .love-bounce { animation: bounce 0.8s ease-in-out infinite 0.4s; }
+        .loader-text { 
+            font-size: clamp(1rem, 4vw, 1.4rem); 
+            color: #ff69b4; 
+            margin-bottom: 3rem; 
+            animation: pulse 1.5s infinite; 
+            text-shadow: 0 0 15px #ff1493;
+        }
+        .progress-bar {
+            width: clamp(200px, 50vw, 300px);
+            height: 8px;
+            background: rgba(255,20,147,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(255,20,147,0.4);
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff1493, #ff69b4, #ff1493);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 20px #ff1493;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fall { 0%,100% { transform: translateY(0); } 50% { transform: translateY(25px); } }
+        @keyframes bounce { 0%,100% { transform: scale(1); } 50% { transform: scale(1.4); } }
+        @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        
+        /* MAIN CONTENT - MOBILE CENTER */
+        .main-content {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(1rem, 5vw, 3rem);
+            z-index: 10;
+            opacity: 0;
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px);
+        }
+        
+        .content {
+            text-align: center;
+            max-width: 90vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(1rem, 4vw, 2.5rem);
+        }
+        
+        .title-anim {
+            font-size: clamp(2.5rem, 12vw, 6rem);
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff1493 0%, #ff69b4 50%, #ffb6c1 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255,20,147,0.8);
+            animation: titleGlow 2s ease-out forwards, gradientShift 3s ease infinite 1s;
+            margin: 0;
+        }
+        
+        .emoji-heart {
+            font-size: clamp(4rem, 18vw, 8rem);
+            text-shadow: 0 0 60px #ff1493, 0 0 100px #ff69b4;
+            animation: heartBeat 2s ease-in-out infinite 0.5s;
+            line-height: 1;
+        }
+        
+        .text-anim {
+            font-size: clamp(1.1rem, 4vw, 1.6rem);
+            color: #ffe4e1;
+            line-height: 1.6;
+            max-width: 80%;
+            text-shadow: 0 0 20px rgba(255,20,147,0.6);
+            animation: fadeIn 1.5s ease-out forwards 1s;
+            margin: 0;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: clamp(1rem, 4vw, 1.4rem) clamp(2rem, 8vw, 3rem);
+            background: linear-gradient(145deg, #ff1493, #ff69b4);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: clamp(1rem, 4vw, 1.3rem);
+            font-weight: 700;
+            box-shadow: 0 15px 35px rgba(255,20,147,0.5);
+            transition: all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: btnSlide 1.5s ease-out forwards 1.5s;
+            position: relative;
+            z-index: 20;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-8px) scale(1.05) !important;
+            box-shadow: 0 25px 50px rgba(255,20,147,0.7) !important;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes titleGlow { from { opacity: 0; transform: translateY(50px) scale(0.8); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes heartBeat { 0%,100% { transform: scale(1) rotate(-3deg); } 50% { transform: scale(1.25) rotate(3deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes btnSlide { from { opacity: 0; transform: translateY(40px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        
+        /* MOBILE FIX */
+        @media (max-width: 480px) {
+            .content { gap: 1.5rem; padding: 1rem; }
+            .main-content { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+        <div class="love-loader">
+            <span class="love-spin">💖</span>
+            <span class="love-fall">💕</span>
+            <span class="love-bounce">💗</span>
+        </div>
+        <p class="loader-text">Loading cinta magic...</p>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+    </div>
+    
+    <!-- CANVAS -->
+    <canvas id="canvas"></canvas>
+    
+    <!-- CONTENT -->
+    <main class="main-content" id="content">
+        <div class="content">
+            <h1 class="title-anim">Happy Birthday</h1>
+            <div class="emoji-heart">❤️</div>
+            <p class="text-anim">Semoga panjang umur, sehat selalu,<br>dan semua impianmu tercapai ✨</p>
+            <a href="erna.html" class="btn">👉bukaa ini!!👈</a>
+        </div>
+    </main>
+
+    <script>
+        // INLINE JS - BULLETPROOF
+        (function() {
+            const loader = document.getElementById('loader');
+            const progress = document.getElementById('progress');
+            const content = document.getElementById('content');
+            const canvas = document.getElementById('canvas');
+            
+            let ctx, particles = [], raf;
+            
+            // Canvas immediate
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx = canvas.getContext('2d');
+            
+            // 60 particles
+            for (let i = 0; i < 60; i++) {
+                particles[i] = {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5,
+                    r: Math.random() * 4 + 1.5
+                };
+            }
+            
+            // Animation loop
+            function loop() {
+                ctx.fillStyle = 'rgba(26,0,51,0.25)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#ff1493';
+                
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                    
+                    const hue = 320 + (p.x / canvas.width) * 40;
+                    ctx.fillStyle = `hsla(${hue}, 85%, 65%, 0.9)`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                
+                ctx.shadowBlur = 0;
+                raf = requestAnimationFrame(loop);
+            }
+            loop();
+            
+            // Loading
+            let prog = 0;
+            function loading() {
+                prog += 6;
+                progress.style.width = prog + '%';
+                if (prog < 100) requestAnimationFrame(loading);
+                else setTimeout(hide, 300);
+            }
+            
+            function hide() {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    content.style.opacity = '1';
+                }, 400);
+            }
+            
+            // Start
+            loading();
+            
+            // Safety
+            setTimeout(hide, 2000);
+            
+            // Resize
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        })();
+    </script>
+</body>
+</html>

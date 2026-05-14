@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Love ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <canvas id="canvas"></canvas>
+    
+    <div class="stars"></div>
+    
+    <main class="login-container">
+        <div class="love-spinner">
+            <div class="love-heart">💖</div>
+            <div class="love-heart">💕</div>
+            <div class="love-heart">💗</div>
+        </div>
+        
+        <form class="login-form" id="loginForm">
+            <div class="title-group">
+                <h1>Unlock Love</h1>
+                <p>Masukan PIN rahasia 💕</p>
+            </div>
+            
+            <div class="pin-inputs">
+                <input type="text" maxlength="1" class="pin-box" data-index="0">
+                <input type="text" maxlength="1" class="pin-box" data-index="1">
+                <input type="text" maxlength="1" class="pin-box" data-index="2">
+                <input type="text" maxlength="1" class="pin-box" data-index="3">
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <span>Masuk</span>
+                <div class="btn-ripple"></div>
+            </button>
+            
+            <div class="hint">
+                <span>Hint: 25 12 ✨</span>
+            </div>
+        </form>
+        
+        <div class="success-modal" id="successModal">
+            <div class="success-content">
+                <div class="success-hearts">💖💕💗💖</div>
+                <h2>Akses Diberikan! ❤️</h2>
+                <p>Selamat datang ke dunia cinta...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
